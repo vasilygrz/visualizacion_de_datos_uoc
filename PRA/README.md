@@ -6,6 +6,8 @@ Esta es una *web app* creada con Python y Streamlit para analizar la importació
 
 El armamento pesado son las armas pesadas son máquinas de mayor tamaño que pueden utilizarse en combate inmediato e integrar diversas necesidades militares (movimiento, potencia de fuego, etc.) en un único sistema.
 
+Enlace: <https://ukrainearms.streamlit.app/>
+
 ## Licencia
 
 Los [términos de uso](https://www.sipri.org/about/terms-and-conditions) del SIPRI permiten:
