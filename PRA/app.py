@@ -1,5 +1,6 @@
 # Libraries
 from __future__ import annotations
+from pathlib import Path
 import numpy as np
 import pandas as pd
 import plotly.express as px
@@ -8,7 +9,7 @@ import pydeck as pdk
 import streamlit as st
 
 
-def load_trade_register(path: str) -> pd.DataFrame:
+def load_trade_register(path: Path) -> pd.DataFrame:
 	"""
 	Load the processed trade register data from a Parquet file.
 	"""
@@ -16,7 +17,7 @@ def load_trade_register(path: str) -> pd.DataFrame:
 	return df.sort_values(by=["Supplier", "Delivery year start"], ascending=True)
 
 
-def load_ukraine_imports(path: str) -> pd.DataFrame:
+def load_ukraine_imports(path: Path) -> pd.DataFrame:
 	"""
 	Load the Ukraine importer rank data from a Parquet file.
 	"""
@@ -221,8 +222,9 @@ def create_delivered_weapons_plots(
 
 
 # DATA LOAD
-df_trade_register = load_trade_register("data/trade_register_processed.parquet")
-df_ukraine_imports = load_ukraine_imports("data/ukraine_importer_rank_by_period.parquet")
+data_dir = Path(__file__).parent / "data"
+df_trade_register = load_trade_register(data_dir / "trade_register_processed.parquet")
+df_ukraine_imports = load_ukraine_imports(data_dir / "ukraine_importer_rank_by_period.parquet")
 
 # PAGE TITLE AND LAYOUT
 st.set_page_config(page_title="Ukraine Arms Transfers", layout="wide")
