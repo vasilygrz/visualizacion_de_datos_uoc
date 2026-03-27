@@ -18,7 +18,8 @@
 }
 
 </style>
-            
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
 <style>
@@ -156,9 +157,14 @@
 </ul>
 <h2 id="1-gráfico-de-línea">1. Gráfico de línea</h2>
 <ul>
-<li>Muestra la evolución de una o varias variables numéricas (cuantitativas) conectando observaciones ordenadas (normalmente en el tiempo) mediante segmentos rectos.</li>
-<li>Caso de uso: detectar tendencia, cambios y ciclos en series temporales; funciona bien con pocas líneas (si hay demasiadas aparece el efecto <em>spaghetti</em> y se pierde legibilidad).</li>
-<li>Buenas prácticas: cuando hay pocas mediciones, es recomendable mostrar marcadores (puntos) en cada observación para dejar claro dónde hay datos y no sugerir una continuidad falsa; cuidar la proporción (<em>aspect ratio</em>) para no exagerar o aplanar tendencias; evitar ejes dobles para comparar variables (pueden inducir a interpretaciones contradictorias según la escala); y cuidar el eje Y (no siempre debe empezar en 0, pero sí evitar rangos que exageren diferencias sin indicarlo claramente).</li>
+<li><strong>Definición</strong>: muestra la evolución de una o varias variables numéricas (cuantitativas) conectando observaciones ordenadas (normalmente en el tiempo) mediante segmentos rectos.</li>
+<li><strong>Origen y propósito</strong>: se populariza en el siglo XVIII con William Playfair como herramienta para comunicar cambios de magnitud en el tiempo (especialmente en contextos económicos) de forma comprensible.</li>
+<li><strong>Cómo funciona (codificación)</strong>: el eje X representa el orden (tiempo o secuencia) y el eje Y la magnitud; la posición vertical codifica el valor y la línea guía la lectura de tendencia y cambios.</li>
+<li><strong>Ejemplos típicos</strong>: precios/ventas por mes, evolución de un indicador macroeconómico, métricas de actividad o sensores a lo largo del tiempo.</li>
+<li><strong>Datos adecuados (tipo y estructura)</strong>: pares ordenados <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(x, y)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mclose">)</span></span></span></span> con <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span></span></span></span> cuantitativa; el <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span> suele ser temporal. Con 2 puntos ya se puede trazar, pero para interpretar tendencia conviene disponer de una serie razonablemente continua.</li>
+<li><strong>Tamaño y límites prácticos</strong>: funciona muy bien con pocas series (p. ej., 1-6 líneas). Con muchas líneas aparece el efecto <em>spaghetti</em> y pierde legibilidad; en ese caso conviene filtrar, agrupar o usar <em>small multiples</em>.</li>
+<li><strong>Buenas prácticas y limitaciones</strong>: si hay pocos puntos, es recomendable mostrar marcadores (puntos) en cada observación para dejar claro dónde hay datos y no sugerir continuidad falsa; cuidar la proporción (<em>aspect ratio</em>) para no exagerar o aplanar tendencias; evitar ejes dobles para comparar variables; y cuidar el eje Y (no siempre debe empezar en 0, pero sí evitar rangos que exageren diferencias sin indicarlo claramente).</li>
+<li><strong>Comentario de la visualización</strong>: se representa la tasa absoluta de paro en el municipio de Madrid (diciembre de cada año) entre 2017 y 2023. Se aprecia un incremento marcado en 2020 (impacto de la pandemia) y un descenso posterior hasta 2023; el objetivo es <strong>comunicar</strong> el cambio temporal de un único indicador con lectura directa.</li>
 </ul>
 <div style="text-align: center;">
   <iframe src="img/tasa_paro_madrid_2017_2023.svg" style="border:none;" width="65%" height="500px"></iframe>
@@ -169,11 +175,14 @@
 </div>
 <h2 id="2-gráfico-de-violín">2. Gráfico de violín</h2>
 <ul>
-<li>Visualiza la distribución de una variable numérica para uno o varios grupos: cada &quot;violín&quot; representa un grupo y su ancho indica densidad (cuanto más ancho, más observaciones hay en ese rango).</li>
-<li>Es similar a un <em>box plot</em>, pero añade detalle sobre la forma de la distribución (asimetrías, colas, multimodalidad); puede combinarse con una caja interna para ver mediana y cuartiles.</li>
-<li>Caso de uso: comparar ranking (p. ej., medianas) y distribución entre grupos cuando hay muchas observaciones.</li>
-<li>Precauciones: el suavizado (estimación <em>kernel</em>) puede cambiar la percepción de la forma; si los tamaños muestrales son distintos, conviene indicarlo; y forzar el mismo ancho para todos los violines puede ser estéticamente atractivo pero engañoso (puede sugerir densidades equivalentes cuando no lo son). Además, el área de cada violín suele estar normalizada (no codifica el tamaño muestral), así que conviene no interpretar más área como más datos.</li>
-<li>Buena práctica: ordenar los grupos por la mediana (o por otro estadístico relevante) facilita la comparación.</li>
+<li><strong>Definición</strong>: visualiza la distribución de una variable numérica para uno o varios grupos; cada &quot;violín&quot; representa un grupo y su ancho indica densidad (cuanto más ancho, más observaciones hay en ese rango).</li>
+<li><strong>Origen y propósito</strong>: fue propuesto por Hintze y Nelson (<a href="https://www.tandfonline.com/doi/abs/10.1080/00031305.1998.10480559">1998</a>) como extensión del <em>box plot</em> de Tukey (1977), combinando resumen estadístico y forma de la distribución (densidad) en una sola visualización.</li>
+<li><strong>Cómo funciona (codificación)</strong>: para cada grupo se estima una densidad (habitualmente con <em>kernel density estimation</em>, KDE) y se dibuja de forma simétrica; suele añadirse mediana/cuartiles (caja interna) y, opcionalmente, puntos individuales.</li>
+<li><strong>Ejemplos típicos</strong>: distribución de tiempos de respuesta por servidor, notas por clase, ingresos por barrio, medidas biológicas por tratamiento.</li>
+<li><strong>Datos adecuados (tipo y estructura)</strong>: una variable cuantitativa <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span></span></span></span> y una variable categórica <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>g</mi></mrow><annotation encoding="application/x-tex">g</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span></span></span></span> (grupos). Requiere varias observaciones por grupo para que la estimación de densidad tenga sentido.</li>
+<li><strong>Tamaño y límites prácticos</strong>: con tamaños muestrales muy pequeños por grupo (p. ej., <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>&lt;</mo><mn>10</mn></mrow><annotation encoding="application/x-tex">n&lt;10</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">10</span></span></span></span>) el violín puede ser inestable y conviene priorizar puntos/boxplot; con tamaños grandes funciona bien, aunque conviene controlar sobreimpresión si se muestran puntos.</li>
+<li><strong>Buenas prácticas y limitaciones</strong>: el suavizado (KDE) puede cambiar la percepción de la forma; si los tamaños muestrales son distintos, conviene indicarlo; y forzar el mismo ancho máximo para todos los violines puede ser estéticamente atractivo pero engañoso. Además, el área suele estar normalizada (no codifica <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span>), así que no debe interpretarse “más área = más datos”. Ordenar los grupos por la mediana (u otro estadístico) facilita la comparación.</li>
+<li><strong>Comentario de la visualización</strong>: se compara la distribución de la renta neta media por hogar entre distritos de Madrid para cada año (2017-2023) mediante paneles por año. El objetivo es descubrir cómo cambia el nivel y la dispersión entre distritos a lo largo del tiempo (desigualdad territorial y su evolución).</li>
 </ul>
 <div style="text-align: center;">
   <iframe src="img/violin_renta_neta_madrid_2017_2023.svg" style="border:none;" width="75%" height="780px"></iframe>
@@ -184,11 +193,14 @@
 </div>
 <h2 id="3-gráfico-radial">3. Gráfico radial</h2>
 <ul>
-<li>También llamado <em>spider chart</em>: representa una o varias series sobre múltiples variables cuantitativas, con un eje por variable y todos los ejes convergiendo en el centro.</li>
-<li>Caso de uso: ver el perfil de un individuo/grupo en varias dimensiones (fortalezas y debilidades) y comparar pocos perfiles.</li>
-<li>Precauciones: el diseño circular dificulta comparar valores con precisión (suele ser más fácil con barras); el orden de las categorías afecta mucho a la forma y puede inducir conclusiones engañosas; con muchas series hay sobreimpresión (mejor <a href="https://en.wikipedia.org/wiki/Small_multiple"><em>small multiples</em></a>).</li>
-<li>Escalas: si las variables no comparten unidad/escala, hay que mostrar escalas de manera muy explícita (si no, el lector asumirá escalas comparables); además, el área del polígono puede hacer que pequeñas diferencias parezcan más grandes (la percepción del área no es lineal).</li>
-<li>En general, para comparación precisa suele funcionar mejor codificar cantidad con posición/longitud (p. ej., barras) que con ángulos/áreas, que son más difíciles de juzgar.</li>
+<li><strong>Definición</strong>: también llamado <em>spider chart</em> o <em>radar chart</em>: representa una o varias series sobre múltiples variables cuantitativas, con un eje por variable y todos los ejes convergiendo en el centro.</li>
+<li><strong>Origen y propósito</strong>: su antecedente es el <em>star plot</em> (finales del siglo XIX), usado para mostrar perfiles multivariantes. Se utiliza para resumir “perfiles” en varias dimensiones y facilitar una comparación cualitativa rápida.</li>
+<li><strong>Cómo funciona (codificación)</strong>: cada variable es un eje radial; la distancia al centro codifica la magnitud. Al unir los puntos se forma un polígono que actúa como “huella” del perfil.</li>
+<li><strong>Ejemplos típicos</strong>: comparar perfiles de productos (precio, autonomía, potencia…), rendimiento de equipos por métricas, perfiles de distritos por indicadores.</li>
+<li><strong>Datos adecuados (tipo y estructura)</strong>: una matriz con variables cuantitativas en columnas y perfiles/entidades en filas. Para combinar variables con unidades distintas suele ser necesario normalizar (p. ej., min-max a [0,1]).</li>
+<li><strong>Tamaño y límites prácticos</strong>: funciona mejor con pocas variables (5-10 ejes) y pocas series (2-5). Con muchas series se solapan y se vuelve ilegible; suele ser preferible usar <em>small multiples</em> o alternativas como barras/coeficientes.</li>
+<li><strong>Buenas prácticas y limitaciones</strong>: el diseño circular dificulta comparar valores con precisión; el orden de las categorías afecta a la forma; la percepción del área no es lineal y puede exagerar diferencias; y si las variables no comparten escala hay que explicitarla o normalizarla de forma transparente.</li>
+<li><strong>Comentario de la visualización</strong>: se comparan perfiles de distritos combinando paro y renta para 2017, 2020 y 2023 (seis ejes). Se muestran tres distritos (Chamartín, Moncloa-Aravaca y Puente de Vallecas) y se normaliza para poder mezclar unidades. El objetivo es resumir diferencias socioeconómicas entre distritos y cómo cambian entre años, asumiendo que la comparación es más cualitativa que precisa.</li>
 </ul>
 <div style="text-align: center;">
   <iframe src="img/radar_renta_paro_2017_2020_2023.svg" style="border:none;" width="65%" height="710px"></iframe>
@@ -199,7 +211,8 @@
     Ayuntamiento de Madrid</a>.
   </div>
 </div>
-            
+
+            <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
             
         </body>
         </html>
