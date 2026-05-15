@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>PEC3&period; Narraci&oacute;n de historias con datos</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="pec3-narración-de-historias-con-datos">PEC3. Narración de historias con datos</h1>
+<div>
+  <div style="font-size: 15px; font-weight: bold;">
+    Visualización de datos (M2.859)<br>
+    Máster Universitario en Ciencia de Datos, UOC
+  </div>
+  <div style="font-size: 15px; ; font-weight: bold; margin-top: 10px; margin-bottom: 10px;">
+    Vasily Griaznov
+  </div>
+</div>
+<h2 id="datos">Datos</h2>
+<p>El conjunto de datos proviene del artículo <em>Hotel booking demand datasets</em> de Antonio et al. (<a href="https://doi.org/10.1016/j.dib.2018.11.126">2019</a>). Contiene información sobre las reservas realizadas en dos hoteles de Portugal entre julio de 2015 y agosto de 2017; uno ubicado en Lisboa (ciudad) y otro en el Algarve (playa). Estos datos han sido ampliamente utilizados para diversos análisis, entre los que se encuentran el aprendizaje automático para predecir cancelaciones, así como para la creación de visualizaciones interactivas que permiten a los usuarios explorar y comprender las tendencias y patrones en el sector del turismo.</p>
+<p>Con un total de 119.390 registros, las variables incluyen fecha de reserva, fecha de llegada, número de adultos, niños y bebés, tipo de hotel (urbano o vacacional), segmento de mercado, precio medio diario (<em>average daily rate</em>, ADR), entre otras.</p>
+<h2 id="objetivo">Objetivo</h2>
+<p>El objetivo de esta actividad es crear una visualización interactiva con Plotly donde se comparan las diferencias entre los hoteles de Lisboa y Algarve en términos de precio medio diario y composición por segmento de mercado, con filtros para explorar año y segmento.</p>
+<h2 id="software">Software</h2>
+<ul>
+<li><strong>Lenguaje de programación</strong>: Python 3.13.</li>
+<li><strong>Procesamiento</strong>: pandas.</li>
+<li><strong>Visualización</strong>: Plotly.</li>
+</ul>
+<h2 id="preprocesamiento-y-limpieza-de-datos">Preprocesamiento y limpieza de datos</h2>
+<p>Se han aplicado las siguientes transformaciones para limpiar y preparar los datos:</p>
+<ol>
+<li>Filtrado de recuentos de huéspedes a rangos realistas (adultos &lt;10; niños/bebés &lt;5).</li>
+<li>Imputación de valores ausentes en <code>children</code> a 0.</li>
+<li>Eliminación de registros inconsistentes (0 huéspedes, 0 noches).</li>
+<li>Procesamiento del precio medio diario:
+<ul>
+<li>Se eliminan de valores negativos.</li>
+<li>Se acotan los valores extremos a 1.000 €.</li>
+</ul>
+</li>
+<li>Agrupar los 8 segmentos originales (<code>market_segment</code>) en 5 categorías:
+<ul>
+<li>Agencias (TA/TO): &quot;Online TA&quot;, &quot;Offline TA/TO&quot;</li>
+<li>Corporativo: &quot;Corporate&quot;</li>
+<li>Directo: &quot;Direct&quot;</li>
+<li>Grupos: &quot;Groups&quot;</li>
+<li>Otros: &quot;Aviation&quot;, &quot;Complementary&quot;, &quot;Undefined&quot;</li>
+</ul>
+</li>
+</ol>
+<h2 id="1-proporción-de-reservas-por-hotel-y-segmento-de-mercado">1. Proporción de reservas por hotel y segmento de mercado</h2>
+<div style="text-align: center;">
+  <iframe src="fig/fig1.html" style="border:none;" width="65%" height="500px"></iframe>
+</div>
+<h2 id="2-evolución-mensual-del-número-de-reservas-por-hotel">2. Evolución mensual del número de reservas por hotel</h2>
+<div style="text-align: center;">
+  <iframe src="fig/fig2.html" style="border:none;" width="65%" height="500px"></iframe>
+</div>
+<h2 id="3-evolución-mensual-de-precios-mediana-por-hotel">3. Evolución mensual de precios (mediana) por hotel</h2>
+<div style="text-align: center;">
+  <iframe src="fig/fig3.html" style="border:none;" width="65%" height="500px"></iframe>
+</div>
+<h2 id="4-distribución-de-precios-por-hotel-y-segmento-de-mercado">4. Distribución de precios por hotel y segmento de mercado</h2>
+<div style="text-align: center;">
+  <iframe src="fig/fig4.html" style="border:none;" width="65%" height="500px"></iframe>
+</div>
+
+            
+            
+        </body>
+        </html>
